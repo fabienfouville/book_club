@@ -1,0 +1,725 @@
+[
+  {
+    "id": "ec47fe93-6f8f-5ef3-9ef4-8e8daa8091a7",
+    "isbn13": "9782266320481",
+    "title": "Dune",
+    "authors": [
+      "Frank Herbert"
+    ],
+    "published_year": 1965,
+    "page_count": 896,
+    "genres": [
+      "science-fiction",
+      "aventure"
+    ],
+    "description": "Sur Arrakis, planète désertique et unique source de l'Épice, le jeune Paul Atréides devient le pivot d'une lutte impitoyable entre grandes maisons.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266320481-L.jpg"
+  },
+  {
+    "id": "5616bdae-73a6-5b97-a556-64527b4668e6",
+    "isbn13": "9782070612888",
+    "title": "Le Seigneur des anneaux : La Communauté de l'anneau",
+    "authors": [
+      "J.R.R. Tolkien"
+    ],
+    "published_year": 1954,
+    "page_count": 704,
+    "genres": [
+      "fantasy",
+      "aventure",
+      "classique"
+    ],
+    "description": "Un anneau unique, un hobbit ordinaire et une compagnie improbable partie détruire le mal à sa source.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070612888-L.jpg"
+  },
+  {
+    "id": "9c0b514d-2757-5998-aaf1-823e4b951e75",
+    "isbn13": "9782070643066",
+    "title": "Le Petit Prince",
+    "authors": [
+      "Antoine de Saint-Exupéry"
+    ],
+    "published_year": 1943,
+    "page_count": 96,
+    "genres": [
+      "classique",
+      "jeunesse",
+      "philosophie"
+    ],
+    "description": "Un aviateur échoué dans le désert rencontre un enfant venu d'une autre planète, et réapprend l'essentiel.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070643066-L.jpg"
+  },
+  {
+    "id": "7f9008d8-7d25-5d46-8606-58b757fe2bb4",
+    "isbn13": "9782070368228",
+    "title": "1984",
+    "authors": [
+      "George Orwell"
+    ],
+    "published_year": 1949,
+    "page_count": 438,
+    "genres": [
+      "science-fiction",
+      "classique",
+      "essai"
+    ],
+    "description": "Dans un monde où Big Brother surveille tout, Winston Smith commence à penser par lui-même.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070368228-L.jpg"
+  },
+  {
+    "id": "8388d5fd-6d0d-51ec-94f5-b24bcc3b8433",
+    "isbn13": "9782070413119",
+    "title": "Harry Potter à l'école des sorciers",
+    "authors": [
+      "J.K. Rowling"
+    ],
+    "published_year": 1997,
+    "page_count": 308,
+    "genres": [
+      "fantasy",
+      "jeunesse",
+      "aventure"
+    ],
+    "description": "Le jour de ses onze ans, Harry apprend qu'il est sorcier et rejoint l'école de Poudlard.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070413119-L.jpg"
+  },
+  {
+    "id": "7bfbfa54-fc87-561b-b9dd-375cf171e687",
+    "isbn13": "9782253004226",
+    "title": "L'Étranger",
+    "authors": [
+      "Albert Camus"
+    ],
+    "published_year": 1942,
+    "page_count": 186,
+    "genres": [
+      "classique",
+      "litterature",
+      "philosophie"
+    ],
+    "description": "Meursault enterre sa mère sans pleurer, puis tue un homme sous le soleil d'Alger. La société le juge sur le premier fait.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253004226-L.jpg"
+  },
+  {
+    "id": "8111a705-5eda-5bbb-84b0-be0b9c6db54b",
+    "isbn13": "9782070360024",
+    "title": "La Peste",
+    "authors": [
+      "Albert Camus"
+    ],
+    "published_year": 1947,
+    "page_count": 288,
+    "genres": [
+      "classique",
+      "litterature"
+    ],
+    "description": "Oran est frappée par une épidémie. Un médecin choisit de soigner, sans espoir et sans grandiloquence.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070360024-L.jpg"
+  },
+  {
+    "id": "36fda8a3-1be4-5b00-a14e-dc520c3fa0aa",
+    "isbn13": "9782253096344",
+    "title": "Le Comte de Monte-Cristo",
+    "authors": [
+      "Alexandre Dumas"
+    ],
+    "published_year": 1844,
+    "page_count": 1400,
+    "genres": [
+      "classique",
+      "aventure",
+      "historique"
+    ],
+    "description": "Trahi et emprisonné, Edmond Dantès revient sous un autre nom, immensément riche, pour rendre à chacun son dû.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253096344-L.jpg"
+  },
+  {
+    "id": "937cac64-92e4-56c9-b33e-36c679f4008c",
+    "isbn13": "9782070408504",
+    "title": "Les Misérables",
+    "authors": [
+      "Victor Hugo"
+    ],
+    "published_year": 1862,
+    "page_count": 1900,
+    "genres": [
+      "classique",
+      "litterature",
+      "historique"
+    ],
+    "description": "De Jean Valjean au bagne aux barricades de 1832, la fresque d'un siècle et d'une conscience.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070408504-L.jpg"
+  },
+  {
+    "id": "bd40ffad-6713-5be3-9261-580cc63f6c2a",
+    "isbn13": "9782266283342",
+    "title": "Le Trône de fer",
+    "authors": [
+      "George R.R. Martin"
+    ],
+    "published_year": 1996,
+    "page_count": 816,
+    "genres": [
+      "fantasy",
+      "aventure"
+    ],
+    "description": "Sept royaumes, autant de familles prêtes à tout, et un hiver qui approche.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266283342-L.jpg"
+  },
+  {
+    "id": "79ef2a87-1f9d-5462-9ead-67531903d96c",
+    "isbn13": "9782070585045",
+    "title": "Le Hobbit",
+    "authors": [
+      "J.R.R. Tolkien"
+    ],
+    "published_year": 1937,
+    "page_count": 384,
+    "genres": [
+      "fantasy",
+      "aventure",
+      "jeunesse"
+    ],
+    "description": "Bilbo Sacquet quitte son terrier confortable pour une expédition vers la montagne d'un dragon.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070585045-L.jpg"
+  },
+  {
+    "id": "b616cc4e-69b2-5f3b-9802-59101ad07b0d",
+    "isbn13": "9782253010692",
+    "title": "Fahrenheit 451",
+    "authors": [
+      "Ray Bradbury"
+    ],
+    "published_year": 1953,
+    "page_count": 213,
+    "genres": [
+      "science-fiction",
+      "classique"
+    ],
+    "description": "Montag est pompier : son métier est de brûler les livres. Jusqu'au jour où il en ouvre un.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253010692-L.jpg"
+  },
+  {
+    "id": "48398e66-98ac-565e-9f47-38c80f60fcc9",
+    "isbn13": "9782070373086",
+    "title": "Le Meilleur des mondes",
+    "authors": [
+      "Aldous Huxley"
+    ],
+    "published_year": 1932,
+    "page_count": 320,
+    "genres": [
+      "science-fiction",
+      "classique",
+      "philosophie"
+    ],
+    "description": "Une société sans douleur, sans famille et sans liberté, où le bonheur est distribué en comprimés.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070373086-L.jpg"
+  },
+  {
+    "id": "a3bb499c-72c7-5ae5-b9e9-7d39e798997d",
+    "isbn13": "9782266111560",
+    "title": "Fondation",
+    "authors": [
+      "Isaac Asimov"
+    ],
+    "published_year": 1951,
+    "page_count": 254,
+    "genres": [
+      "science-fiction"
+    ],
+    "description": "Hari Seldon prédit la chute de l'Empire et fonde une communauté chargée d'abréger les millénaires de chaos.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266111560-L.jpg"
+  },
+  {
+    "id": "8abf979e-4ada-5c27-8279-be1351b07441",
+    "isbn13": "9782070466276",
+    "title": "Millénium 1 : Les hommes qui n'aimaient pas les femmes",
+    "authors": [
+      "Stieg Larsson"
+    ],
+    "published_year": 2005,
+    "page_count": 576,
+    "genres": [
+      "policier",
+      "thriller"
+    ],
+    "description": "Un journaliste déchu et une hackeuse hors norme enquêtent sur une disparition vieille de quarante ans.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070466276-L.jpg"
+  },
+  {
+    "id": "d2a3e4de-2dad-5fd9-a0a5-c388f2bb5318",
+    "isbn13": "9782253176909",
+    "title": "Le Dahlia noir",
+    "authors": [
+      "James Ellroy"
+    ],
+    "published_year": 1987,
+    "page_count": 480,
+    "genres": [
+      "policier",
+      "thriller",
+      "historique"
+    ],
+    "description": "Los Angeles, 1947 : le meurtre atroce d'une jeune femme dévore deux policiers.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253176909-L.jpg"
+  },
+  {
+    "id": "29ba266a-99af-5afc-9a6d-5f0b848c88d5",
+    "isbn13": "9782253009689",
+    "title": "Shining",
+    "authors": [
+      "Stephen King"
+    ],
+    "published_year": 1977,
+    "page_count": 672,
+    "genres": [
+      "horreur",
+      "thriller"
+    ],
+    "description": "Gardien d'un hôtel coupé du monde par l'hiver, Jack Torrance sombre, et son fils voit ce que l'hôtel cache.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253009689-L.jpg"
+  },
+  {
+    "id": "5a490f85-dfda-525d-a366-a21b78c7abee",
+    "isbn13": "9782253151296",
+    "title": "Ça",
+    "authors": [
+      "Stephen King"
+    ],
+    "published_year": 1986,
+    "page_count": 1138,
+    "genres": [
+      "horreur",
+      "thriller"
+    ],
+    "description": "Sept enfants de Derry affrontent une chose qui revient tous les vingt-sept ans.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253151296-L.jpg"
+  },
+  {
+    "id": "d37b2a19-ba74-5418-9265-6f7711b6985c",
+    "isbn13": "9782070754793",
+    "title": "Le Nom de la rose",
+    "authors": [
+      "Umberto Eco"
+    ],
+    "published_year": 1980,
+    "page_count": 640,
+    "genres": [
+      "policier",
+      "historique",
+      "litterature"
+    ],
+    "description": "Dans une abbaye du XIVe siècle, un moine enquêteur remonte une série de morts jusqu'à une bibliothèque interdite.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070754793-L.jpg"
+  },
+  {
+    "id": "ab934fa0-5bfe-5ba4-9d98-5456d7155a90",
+    "isbn13": "9782266154000",
+    "title": "L'Assassin royal, tome 1",
+    "authors": [
+      "Robin Hobb"
+    ],
+    "published_year": 1995,
+    "page_count": 448,
+    "genres": [
+      "fantasy"
+    ],
+    "description": "Bâtard royal élevé aux écuries, Fitz est formé au métier d'assassin au service de sa famille.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266154000-L.jpg"
+  },
+  {
+    "id": "25878da1-a960-56f1-9ae6-1bd8ffbb1d9e",
+    "isbn13": "9782070612758",
+    "title": "Orgueil et Préjugés",
+    "authors": [
+      "Jane Austen"
+    ],
+    "published_year": 1813,
+    "page_count": 432,
+    "genres": [
+      "romance",
+      "classique",
+      "litterature"
+    ],
+    "description": "Elizabeth Bennet et M. Darcy s'aiment mal, longtemps, et avec beaucoup d'esprit.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070612758-L.jpg"
+  },
+  {
+    "id": "025380d5-6b2e-5c70-8b50-9afdda55946c",
+    "isbn13": "9782253004615",
+    "title": "Madame Bovary",
+    "authors": [
+      "Gustave Flaubert"
+    ],
+    "published_year": 1856,
+    "page_count": 528,
+    "genres": [
+      "classique",
+      "litterature"
+    ],
+    "description": "Emma rêve d'une vie de roman et se heurte à la province, aux dettes et à l'ennui.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253004615-L.jpg"
+  },
+  {
+    "id": "313784be-f384-5bb6-916f-ddd3fb056458",
+    "isbn13": "9782070413003",
+    "title": "Le Vieil Homme et la Mer",
+    "authors": [
+      "Ernest Hemingway"
+    ],
+    "published_year": 1952,
+    "page_count": 120,
+    "genres": [
+      "classique",
+      "litterature",
+      "aventure"
+    ],
+    "description": "Un pêcheur cubain, seul au large, ferre le poisson de sa vie.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070413003-L.jpg"
+  },
+  {
+    "id": "5837f6ef-c4cc-523f-8256-812c8b8a4dab",
+    "isbn13": "9782226257369",
+    "title": "Sapiens : Une brève histoire de l'humanité",
+    "authors": [
+      "Yuval Noah Harari"
+    ],
+    "published_year": 2011,
+    "page_count": 512,
+    "genres": [
+      "essai",
+      "historique",
+      "sciences"
+    ],
+    "description": "Comment une espèce de primates bavards a fini par dominer la planète, et ce que cela lui a coûté.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782226257369-L.jpg"
+  },
+  {
+    "id": "1e1f6457-c146-5e17-9682-94db607de11c",
+    "isbn13": "9782266293259",
+    "title": "Chroniques martiennes",
+    "authors": [
+      "Ray Bradbury"
+    ],
+    "published_year": 1950,
+    "page_count": 320,
+    "genres": [
+      "science-fiction",
+      "poesie"
+    ],
+    "description": "La colonisation de Mars racontée en vignettes mélancoliques.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266293259-L.jpg"
+  },
+  {
+    "id": "b0b421df-2bb1-5b7a-905a-37422865f5fa",
+    "isbn13": "9782070466719",
+    "title": "Le Monde de Sophie",
+    "authors": [
+      "Jostein Gaarder"
+    ],
+    "published_year": 1991,
+    "page_count": 640,
+    "genres": [
+      "philosophie",
+      "jeunesse"
+    ],
+    "description": "Une adolescente reçoit des lettres anonymes qui lui font traverser toute l'histoire de la philosophie.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070466719-L.jpg"
+  },
+  {
+    "id": "a00121c2-aedb-5f1a-b9bd-fe3e96c3818d",
+    "isbn13": "9782253174929",
+    "title": "La Servante écarlate",
+    "authors": [
+      "Margaret Atwood"
+    ],
+    "published_year": 1985,
+    "page_count": 544,
+    "genres": [
+      "science-fiction",
+      "litterature"
+    ],
+    "description": "Dans la république de Galaad, les femmes fertiles sont réduites à leur fonction. Defred raconte.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253174929-L.jpg"
+  },
+  {
+    "id": "596480b9-0f43-5fa6-8d3b-0078951bcb7b",
+    "isbn13": "9782070360420",
+    "title": "Voyage au bout de la nuit",
+    "authors": [
+      "Louis-Ferdinand Céline"
+    ],
+    "published_year": 1932,
+    "page_count": 624,
+    "genres": [
+      "classique",
+      "litterature"
+    ],
+    "description": "De la guerre aux colonies puis à la banlieue, la traversée noire et drôle d'un siècle malade.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070360420-L.jpg"
+  },
+  {
+    "id": "a729d8cb-5673-58a4-aa51-2086e3804f08",
+    "isbn13": "9782264035936",
+    "title": "American Gods",
+    "authors": [
+      "Neil Gaiman"
+    ],
+    "published_year": 2001,
+    "page_count": 704,
+    "genres": [
+      "fantasy",
+      "aventure"
+    ],
+    "description": "Les vieux dieux amenés par les migrants affrontent les nouveaux : la technologie, les médias, l'argent.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782264035936-L.jpg"
+  },
+  {
+    "id": "74b2572d-daa0-54d5-b6ab-88e15f287c59",
+    "isbn13": "9782070438617",
+    "title": "Les Fourmis",
+    "authors": [
+      "Bernard Werber"
+    ],
+    "published_year": 1991,
+    "page_count": 320,
+    "genres": [
+      "science-fiction",
+      "aventure"
+    ],
+    "description": "Un héritage étrange et une cité de fourmis racontée de l'intérieur.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070438617-L.jpg"
+  },
+  {
+    "id": "e8f5e168-07fa-5fe5-ab75-3308fb846b87",
+    "isbn13": "9782253067900",
+    "title": "Le Parfum",
+    "authors": [
+      "Patrick Süskind"
+    ],
+    "published_year": 1985,
+    "page_count": 288,
+    "genres": [
+      "litterature",
+      "thriller",
+      "historique"
+    ],
+    "description": "Grenouille naît sans odeur mais avec un nez absolu, et veut composer le parfum ultime.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253067900-L.jpg"
+  },
+  {
+    "id": "385102d2-d057-586f-9f79-e292cf732151",
+    "isbn13": "9782070368075",
+    "title": "Cent ans de solitude",
+    "authors": [
+      "Gabriel García Márquez"
+    ],
+    "published_year": 1967,
+    "page_count": 480,
+    "genres": [
+      "litterature",
+      "classique"
+    ],
+    "description": "Six générations de Buendía à Macondo, entre prodiges et répétitions.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070368075-L.jpg"
+  },
+  {
+    "id": "63d32abd-8ba8-55a3-83d5-00a89b98ddd3",
+    "isbn13": "9782266226301",
+    "title": "Le Problème à trois corps",
+    "authors": [
+      "Liu Cixin"
+    ],
+    "published_year": 2008,
+    "page_count": 672,
+    "genres": [
+      "science-fiction",
+      "sciences"
+    ],
+    "description": "Un signal envoyé depuis la Chine des années 1960 déclenche le contact le plus dangereux de l'histoire.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266226301-L.jpg"
+  },
+  {
+    "id": "f387364f-793d-5173-aaaa-e4d0ebfa189b",
+    "isbn13": "9782757842096",
+    "title": "La Vérité sur l'affaire Harry Quebert",
+    "authors": [
+      "Joël Dicker"
+    ],
+    "published_year": 2012,
+    "page_count": 864,
+    "genres": [
+      "policier",
+      "thriller"
+    ],
+    "description": "Un jeune romancier enquête sur son mentor accusé d'un meurtre vieux de trente-trois ans.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782757842096-L.jpg"
+  },
+  {
+    "id": "b43254ec-8b19-57b5-a45f-257709b61982",
+    "isbn13": "9782070466672",
+    "title": "L'Alchimiste",
+    "authors": [
+      "Paulo Coelho"
+    ],
+    "published_year": 1988,
+    "page_count": 192,
+    "genres": [
+      "developpement-personnel",
+      "aventure",
+      "philosophie"
+    ],
+    "description": "Un berger andalou part vers les pyramides chercher un trésor annoncé en rêve.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782070466672-L.jpg"
+  },
+  {
+    "id": "3a86af41-f24c-5f94-9de0-df2db4734383",
+    "isbn13": "9782253072980",
+    "title": "Une brève histoire du temps",
+    "authors": [
+      "Stephen Hawking"
+    ],
+    "published_year": 1988,
+    "page_count": 288,
+    "genres": [
+      "sciences",
+      "essai"
+    ],
+    "description": "Du big bang aux trous noirs, la cosmologie racontée sans équations.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253072980-L.jpg"
+  },
+  {
+    "id": "ff72788d-6615-500f-b5f2-aa8998f77762",
+    "isbn13": "9791035802066",
+    "title": "Le Pouvoir du moment présent",
+    "authors": [
+      "Eckhart Tolle"
+    ],
+    "published_year": 1997,
+    "page_count": 256,
+    "genres": [
+      "developpement-personnel",
+      "philosophie"
+    ],
+    "description": "Un manuel pour sortir du bavardage mental et revenir à l'instant.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9791035802066-L.jpg"
+  },
+  {
+    "id": "4c715425-d004-5a59-818d-54c67ac90cb1",
+    "isbn13": "9782075119078",
+    "title": "Le Château ambulant",
+    "authors": [
+      "Diana Wynne Jones"
+    ],
+    "published_year": 1986,
+    "page_count": 352,
+    "genres": [
+      "fantasy",
+      "jeunesse",
+      "young-adult"
+    ],
+    "description": "Changée en vieille dame par une sorcière, Sophie s'engage chez le magicien Hauru.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782075119078-L.jpg"
+  },
+  {
+    "id": "27c8bd2e-34f1-5386-a8f9-64bdffb0aebe",
+    "isbn13": "9782355845031",
+    "title": "L'Attaque des Titans, tome 1",
+    "authors": [
+      "Hajime Isayama"
+    ],
+    "published_year": 2009,
+    "page_count": 192,
+    "genres": [
+      "manga",
+      "horreur",
+      "aventure"
+    ],
+    "description": "Derrière trois murs, l'humanité survit. Puis un titan colossal apparaît au-dessus du mur.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782355845031-L.jpg"
+  },
+  {
+    "id": "848dd9f7-8a66-5e39-afb4-f14527887840",
+    "isbn13": "9782205049503",
+    "title": "Persepolis",
+    "authors": [
+      "Marjane Satrapi"
+    ],
+    "published_year": 2000,
+    "page_count": 160,
+    "genres": [
+      "bd",
+      "biographie",
+      "historique"
+    ],
+    "description": "L'enfance et l'exil de l'autrice, de la révolution iranienne à l'Europe.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782205049503-L.jpg"
+  },
+  {
+    "id": "df98001b-d194-5710-afbb-83c07064d898",
+    "isbn13": "9782226443342",
+    "title": "Le Chant d'Achille",
+    "authors": [
+      "Madeline Miller"
+    ],
+    "published_year": 2011,
+    "page_count": 400,
+    "genres": [
+      "romance",
+      "historique",
+      "litterature"
+    ],
+    "description": "L'Iliade racontée par Patrocle, qui aime Achille depuis l'enfance.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782226443342-L.jpg"
+  },
+  {
+    "id": "982db378-e3f8-5026-81d6-ab0bf23c1313",
+    "isbn13": "9782253260530",
+    "title": "Les Sept Maris d'Evelyn Hugo",
+    "authors": [
+      "Taylor Jenkins Reid"
+    ],
+    "published_year": 2017,
+    "page_count": 464,
+    "genres": [
+      "romance",
+      "litterature"
+    ],
+    "description": "Une star d'Hollywood confie enfin sa vie à une journaliste inconnue, et ce n'est pas un hasard.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782253260530-L.jpg"
+  },
+  {
+    "id": "f8f409dd-a0cd-5803-a745-e2e21bcaddb5",
+    "isbn13": "9782266308236",
+    "title": "La Passe-miroir, livre 1",
+    "authors": [
+      "Christelle Dabos"
+    ],
+    "published_year": 2013,
+    "page_count": 544,
+    "genres": [
+      "fantasy",
+      "young-adult",
+      "romance"
+    ],
+    "description": "Ophélie lit le passé des objets et traverse les miroirs. On la marie de force à l'autre bout du monde.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782266308236-L.jpg"
+  },
+  {
+    "id": "aca71887-dc3f-5038-837f-ac6380417139",
+    "isbn13": "9782212675986",
+    "title": "Clean Code",
+    "authors": [
+      "Robert C. Martin"
+    ],
+    "published_year": 2008,
+    "page_count": 464,
+    "genres": [
+      "informatique",
+      "essai"
+    ],
+    "description": "Ce qui sépare un code qui marche d'un code dont on hérite sans jurer.",
+    "cover_url": "https://covers.openlibrary.org/b/isbn/9782212675986-L.jpg"
+  }
+]

@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ===========================================================================
+   Bookclub — système de design « violet · rose · fantastique »
+   Les variables brutes (--bc-*) basculent en mode sombre ; les tokens Tailwind
+   (--color-*) pointent dessus, donc chaque utilitaire suit le thème.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Teintes de marque */
+  --bc-violet-50:  #f6f1ff;
+  --bc-violet-100: #ece2ff;
+  --bc-violet-200: #d9c6ff;
+  --bc-violet-300: #bf9dff;
+  --bc-violet-400: #a273f7;
+  --bc-violet-500: #8b4fe8;
+  --bc-violet-600: #7534d1;
+  --bc-violet-700: #5e27ab;
+  --bc-violet-800: #451c7d;
+  --bc-violet-900: #2e1254;
+  --bc-violet-950: #1a0a33;
+
+  --bc-rose-300: #ffa6d6;
+  --bc-rose-400: #ff7ac2;
+  --bc-rose-500: #ef4fa8;
+  --bc-rose-600: #d62f8c;
+
+  --bc-gold-400: #ffce5c;
+  --bc-gold-500: #f5b431;
+
+  /* Rôles sémantiques — thème clair */
+  --bc-bg:            #fbf7ff;
+  --bc-bg-deep:       #f3ecff;
+  --bc-surface:       #ffffff;
+  --bc-surface-muted: #f7f1ff;
+  --bc-border:        #e6dafb;
+  --bc-border-strong: #d3c0f3;
+  --bc-ink:           #22103f;
+  --bc-ink-soft:      #5b4a77;
+  --bc-ink-faint:     #8a7aa5;
+  --bc-primary:       #7534d1;
+  --bc-primary-ink:   #ffffff;
+  --bc-primary-soft:  #ece2ff;
+  --bc-accent:        #ef4fa8;
+  --bc-accent-soft:   #ffe6f4;
+  --bc-gold:          #d99a17;
+  --bc-success:       #17916b;
+  --bc-danger:        #d63b4a;
+  --bc-shadow:        0 10px 30px -12px rgb(69 28 125 / 0.28);
+  --bc-shadow-sm:     0 2px 10px -4px rgb(69 28 125 / 0.22);
+}
+
+.dark {
+  color-scheme: dark;
+  --bc-bg:            #140a29;
+  --bc-bg-deep:       #0d0519;
+  --bc-surface:       #1e1038;
+  --bc-surface-muted: #271547;
+  --bc-border:        #362057;
+  --bc-border-strong: #4b2f74;
+  --bc-ink:           #f4ecff;
+  --bc-ink-soft:      #c4b2e4;
+  --bc-ink-faint:     #9585b8;
+  --bc-primary:       #a273f7;
+  --bc-primary-ink:   #1a0a33;
+  --bc-primary-soft:  #2f1a55;
+  --bc-accent:        #ff7ac2;
+  --bc-accent-soft:   #45143a;
+  --bc-gold:          #ffce5c;
+  --bc-success:       #4dd4a6;
+  --bc-danger:        #ff7a86;
+  --bc-shadow:        0 14px 40px -14px rgb(0 0 0 / 0.65);
+  --bc-shadow-sm:     0 2px 12px -4px rgb(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-violet-50:  var(--bc-violet-50);
+  --color-violet-100: var(--bc-violet-100);
+  --color-violet-200: var(--bc-violet-200);
+  --color-violet-300: var(--bc-violet-300);
+  --color-violet-400: var(--bc-violet-400);
+  --color-violet-500: var(--bc-violet-500);
+  --color-violet-600: var(--bc-violet-600);
+  --color-violet-700: var(--bc-violet-700);
+  --color-violet-800: var(--bc-violet-800);
+  --color-violet-900: var(--bc-violet-900);
+  --color-violet-950: var(--bc-violet-950);
+
+  --color-rose-300: var(--bc-rose-300);
+  --color-rose-400: var(--bc-rose-400);
+  --color-rose-500: var(--bc-rose-500);
+  --color-rose-600: var(--bc-rose-600);
+
+  --color-bg:            var(--bc-bg);
+  --color-bg-deep:       var(--bc-bg-deep);
+  --color-surface:       var(--bc-surface);
+  --color-surface-muted: var(--bc-surface-muted);
+  --color-border:        var(--bc-border);
+  --color-border-strong: var(--bc-border-strong);
+  --color-ink:           var(--bc-ink);
+  --color-ink-soft:      var(--bc-ink-soft);
+  --color-ink-faint:     var(--bc-ink-faint);
+  --color-primary:       var(--bc-primary);
+  --color-primary-ink:   var(--bc-primary-ink);
+  --color-primary-soft:  var(--bc-primary-soft);
+  --color-accent:        var(--bc-accent);
+  --color-accent-soft:   var(--bc-accent-soft);
+  --color-gold:          var(--bc-gold);
+  --color-success:       var(--bc-success);
+  --color-danger:        var(--bc-danger);
+
+  --radius-card: 1.125rem;
+  --shadow-soft: var(--bc-shadow);
+  --shadow-tiny: var(--bc-shadow-sm);
+
+  --font-display: "Avenir Next", "Segoe UI Variable Display", ui-rounded, system-ui, -apple-system, sans-serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* --------------------------------------------------------------------- base */
+
+* { border-color: var(--bc-border); }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background-color: var(--bc-bg);
+  color: var(--bc-ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  overflow-x: hidden;
+  /* Ciel de nébuleuse : deux halos violet et rose, très diffus. */
+  background-image:
+    radial-gradient(60rem 40rem at 12% -8%, color-mix(in oklab, var(--bc-violet-400) 22%, transparent), transparent 62%),
+    radial-gradient(48rem 34rem at 96% 4%, color-mix(in oklab, var(--bc-rose-400) 18%, transparent), transparent 60%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+::selection { background: var(--bc-accent); color: #fff; }
+
+:focus-visible {
+  outline: 3px solid var(--bc-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Toute cible tactile respecte 44 px de haut au minimum. */
+button, a[role="button"], [data-tap] { touch-action: manipulation; }
+
+/* ----------------------------------------------------------------- utilities */
+
+@utility bc-gradient {
+  background-image: linear-gradient(135deg, var(--bc-violet-600) 0%, var(--bc-violet-500) 42%, var(--bc-rose-500) 100%);
+}
+
+@utility bc-gradient-text {
+  background-image: linear-gradient(120deg, var(--bc-violet-500), var(--bc-rose-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bc-card {
+  background-color: var(--bc-surface);
+  border: 1px solid var(--bc-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--bc-shadow-sm);
+}
+
+/* Barre de puces de genres : défilement horizontal sans ascenseur visible. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility line-clamp-2-safe {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Effet « grimoire » : liseré lumineux au survol des cartes livre. */
+@utility bc-glow {
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px -16px color-mix(in oklab, var(--bc-violet-500) 70%, transparent);
+  }
+}
+
+@keyframes bc-shimmer {
+  0%   { background-position: -520px 0; }
+  100% { background-position: 520px 0; }
+}
+
+@utility bc-skeleton {
+  background-color: var(--bc-surface-muted);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--bc-violet-300) 32%, transparent),
+    transparent
+  );
+  background-size: 520px 100%;
+  background-repeat: no-repeat;
+  animation: bc-shimmer 1.4s infinite linear;
+  border-radius: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

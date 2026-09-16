@@ -1,0 +1,13 @@
+{
+  "name": "Bookclub",
+  "short_name": "Bookclub",
+  "description": "Votre bibliothèque partagée : noter, critiquer, recommander, emprunter.",
+  "lang": "fr",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#140a29",
+  "theme_color": "#7534d1",
+  "icons": [
+    { "src": "/icone.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
