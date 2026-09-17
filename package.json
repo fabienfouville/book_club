@@ -9,7 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "db:check": "node scripts/db-check.mjs",
-    "covers:resync": "node scripts/resync-seed-covers.mjs"
+    "covers:resync": "node scripts/resync-seed-covers.mjs",
+    "genres:reclassify": "node scripts/reclassify-litterature.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
