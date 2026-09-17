@@ -40,6 +40,11 @@ const RULES: Array<{ match: RegExp; message: string }> = [
     message: "Cette adresse e-mail ne semble pas valide.",
   },
   {
+    match: /signups not allowed for otp|otp_disabled/i,
+    message:
+      "Aucun compte n'existe pour cette adresse. Créez-en un, cela prend une minute.",
+  },
+  {
     match: /signups not allowed|signup is disabled/i,
     message: "Les inscriptions sont momentanément fermées.",
   },
@@ -93,3 +98,20 @@ export const DEMO_AUTH_MESSAGE =
 export const CHECK_INBOX_MESSAGE =
   "Vérifiez votre boîte mail : le lien de connexion vient de partir. " +
   "Pensez à regarder dans les indésirables.";
+
+/**
+ * Codes posés par `/auth/callback` dans `?erreur=` : on ne fait jamais
+ * transiter un message d'erreur brut dans l'adresse.
+ */
+export const CALLBACK_ERRORS: Record<string, string> = {
+  lien: "Ce lien de connexion a expiré ou a déjà servi. Demandez-en un nouveau.",
+  session:
+    "La session n'a pas pu être ouverte. Réessayez, ou utilisez votre mot de passe.",
+  config: DEMO_AUTH_MESSAGE,
+  refus: "La connexion a été interrompue. Vous pouvez réessayer.",
+};
+
+export function callbackErrorMessage(code?: string | null): string | undefined {
+  if (!code) return undefined;
+  return CALLBACK_ERRORS[code] ?? CALLBACK_ERRORS.session;
+}

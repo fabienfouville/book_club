@@ -1,5 +1,8 @@
 import type { Book, LibraryItem, Shelf } from "@/types/database";
 
+/** Longueur maximale d'un avis, partagée par le formulaire et l'action. */
+export const REVIEW_MAX = 4000;
+
 /** Forme de retour commune à toutes les Server Actions du lot bibliothèque. */
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
