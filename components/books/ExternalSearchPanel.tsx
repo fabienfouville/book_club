@@ -25,6 +25,7 @@ export function ExternalSearchPanel({ query }: { query: string }) {
   // Livre en cours de confirmation de genre, et genres choisis pour lui.
   const [picking, setPicking] = useState<ExternalBook | null>(null);
   const [picked, setPicked] = useState<string[]>([]);
+  const [enriching, setEnriching] = useState(false);
 
   function lancer() {
     setState({ status: "chargement" });
@@ -51,6 +52,26 @@ export function ExternalSearchPanel({ query }: { query: string }) {
     setImportError(null);
     setPicked(book.genre_slugs ?? []);
     setPicking(book);
+
+    // Recherche un genre plus précis en tâche de fond (fiche complète de
+    // l'œuvre côté Open Library, puis Google Books en second avis) : la
+    // recherche initiale ne renvoie souvent que des sujets tronqués.
+    setEnriching(true);
+    const params = new URLSearchParams({
+      source: book.source,
+      source_id: book.source_id,
+      title: book.title,
+      author: book.authors[0] ?? "",
+    });
+    fetch(`/api/livres/genres?${params}`)
+      .then((res) => res.json())
+      .then((data: { genres?: string[] }) => {
+        if (data.genres?.length) {
+          setPicked((current) => [...new Set([...current, ...data.genres!])].slice(0, 4));
+        }
+      })
+      .catch(() => {})
+      .finally(() => setEnriching(false));
   }
 
   function confirmerImport() {
@@ -153,7 +174,10 @@ export function ExternalSearchPanel({ query }: { query: string }) {
       >
         {picking ? (
           <div className="space-y-4">
-            <GenrePicker defaultValue={picked} onChangeValue={setPicked} />
+            {enriching ? (
+              <p className="text-xs text-ink-faint">Recherche du genre en cours…</p>
+            ) : null}
+            <GenrePicker key={picked.join(",")} defaultValue={picked} onChangeValue={setPicked} />
             <Button type="button" onClick={confirmerImport} className="w-full">
               Ajouter au catalogue
             </Button>
