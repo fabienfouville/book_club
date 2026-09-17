@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { BookCover } from "@/components/books/BookCover";
 import { BookSynopsis } from "@/components/books/BookSynopsis";
 import { CatalogueRail, RecommendationRail } from "@/components/books/BookRails";
+import { AuthorBooksRail } from "@/components/books/AuthorBooksRail";
 import { BookRatingBreakdown } from "@/components/reviews/RatingBreakdown";
 import { ReviewList } from "@/components/reviews/ReviewList";
 import { BookActions } from "@/components/library/BookActions";
@@ -119,22 +120,14 @@ export default async function LivrePage({
 
       {author ? (
         <section className="space-y-3">
-          <div className="flex items-baseline justify-between gap-2">
-            <h2 className="font-display text-lg font-bold">Du même auteur</h2>
-            <Link
-              href={`/decouvrir?q=${encodeURIComponent(author)}`}
-              className="shrink-0 text-xs font-semibold text-primary hover:underline"
-            >
-              Chercher sur Open Library →
-            </Link>
-          </div>
+          <h2 className="font-display text-lg font-bold">Du même auteur</h2>
           {sameAuthor.length ? (
-            <CatalogueRail label="Du même auteur" items={sameAuthor} />
-          ) : (
-            <p className="text-sm text-ink-soft">
-              Aucun autre livre de {author} dans le catalogue pour l&apos;instant.
-            </p>
-          )}
+            <CatalogueRail label="Du même auteur, dans le Bookclub" items={sameAuthor} />
+          ) : null}
+          <AuthorBooksRail
+            author={author}
+            knownTitles={[book.title, ...sameAuthor.map((c) => c.book.title)]}
+          />
         </section>
       ) : null}
 
