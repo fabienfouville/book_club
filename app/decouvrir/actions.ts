@@ -10,11 +10,16 @@ import type { ExternalBook } from "@/lib/books/normalize";
  * Importe un résultat de recherche externe (Open Library / Google Books)
  * dans le catalogue partagé, puis va directement à sa fiche.
  */
-export async function importExternalBook(external: ExternalBook) {
+export async function importExternalBook(external: ExternalBook, genres?: string[]) {
   const supabase = await createClient();
   const { data } = supabase ? await supabase.auth.getUser() : { data: { user: null } };
 
-  const result = await importBook(external, data.user?.id ?? null);
+  // Les sujets Open Library/Google Books se mappent mal sur nos genres :
+  // on donne toujours la main au membre plutôt que de deviner en silence.
+  const withGenres: ExternalBook =
+    genres && genres.length ? { ...external, genre_slugs: genres } : external;
+
+  const result = await importBook(withGenres, data.user?.id ?? null);
   if (!result.ok || !result.id) {
     return { ok: false as const, error: result.message ?? "L'import a échoué." };
   }

@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { Button, ButtonLink } from "@/components/ui/Button";
 import { BookCover } from "./BookCover";
+import { Sheet } from "@/components/social/Sheet";
+import { GenrePicker } from "@/components/auth/GenrePicker";
 import { importExternalBook } from "@/app/decouvrir/actions";
 import type { ExternalBook } from "@/lib/books/normalize";
 
@@ -20,6 +22,9 @@ export function ExternalSearchPanel({ query }: { query: string }) {
   const [pending, startTransition] = useTransition();
   const [importingKey, setImportingKey] = useState<string | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
+  // Livre en cours de confirmation de genre, et genres choisis pour lui.
+  const [picking, setPicking] = useState<ExternalBook | null>(null);
+  const [picked, setPicked] = useState<string[]>([]);
 
   function lancer() {
     setState({ status: "chargement" });
@@ -42,11 +47,20 @@ export function ExternalSearchPanel({ query }: { query: string }) {
     });
   }
 
-  function importer(book: ExternalBook) {
+  function ouvrirChoixGenre(book: ExternalBook) {
+    setImportError(null);
+    setPicked(book.genre_slugs ?? []);
+    setPicking(book);
+  }
+
+  function confirmerImport() {
+    if (!picking) return;
+    const book = picking;
     setImportError(null);
     setImportingKey(book.source_id);
+    setPicking(null);
     startTransition(async () => {
-      const result = await importExternalBook(book);
+      const result = await importExternalBook(book, picked);
       // En cas de succès, `importExternalBook` redirige : on n'arrive ici
       // que si l'import a échoué.
       if (result && !result.ok) setImportError(result.error);
@@ -123,13 +137,29 @@ export function ExternalSearchPanel({ query }: { query: string }) {
               variant="secondary"
               className="w-full"
               disabled={pending}
-              onClick={() => importer(book)}
+              onClick={() => ouvrirChoixGenre(book)}
             >
               {importingKey === book.source_id ? "Ajout…" : "Ajouter au catalogue"}
             </Button>
           </li>
         ))}
       </ul>
+
+      <Sheet
+        open={picking !== null}
+        onClose={() => setPicking(null)}
+        title="Dans quel genre le classer ?"
+        description={picking?.title}
+      >
+        {picking ? (
+          <div className="space-y-4">
+            <GenrePicker defaultValue={picked} onChangeValue={setPicked} />
+            <Button type="button" onClick={confirmerImport} className="w-full">
+              Ajouter au catalogue
+            </Button>
+          </div>
+        ) : null}
+      </Sheet>
     </div>
   );
 }
