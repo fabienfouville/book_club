@@ -7,7 +7,7 @@ import type {
 } from "@/types/database";
 
 /** Résultat uniforme des Server Actions du lot social. */
-export type ActionResult<T extends object = Record<string, never>> =
+export type ActionResult<T extends object = object> =
   | ({ ok: true } & T)
   | { ok: false; error: string };
 

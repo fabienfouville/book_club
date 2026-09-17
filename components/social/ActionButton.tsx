@@ -20,7 +20,7 @@ export function ActionButton({
   className,
   onDone,
 }: {
-  action: () => Promise<ActionResult<Record<string, never>>>;
+  action: () => Promise<ActionResult>;
   children: React.ReactNode;
   variant?: Variant;
   size?: "sm" | "md" | "lg";

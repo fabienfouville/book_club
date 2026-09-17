@@ -10,6 +10,7 @@ import type {
   RecommendedBook,
 } from "@/types/database";
 import { GENRE_BY_SLUG } from "@/lib/data/genres";
+import type { Sort, Ownership } from "./catalogue-constants";
 import {
   DEMO_BOOKS,
   DEMO_BY_ID,
@@ -35,32 +36,15 @@ import {
 
 /* ------------------------------------------------------------- contrats --- */
 
-export const SORTS = ["populaire", "mieux-note", "recent", "titre"] as const;
-export type Sort = (typeof SORTS)[number];
-
-export const SORT_LABELS: Record<Sort, string> = {
-  populaire: "Les plus populaires",
-  "mieux-note": "Les mieux notés",
-  recent: "Ajoutés récemment",
-  titre: "Ordre alphabétique",
-};
-
-export const OWNERSHIPS = ["tous", "dans-ma-biblio", "hors-ma-biblio"] as const;
-export type Ownership = (typeof OWNERSHIPS)[number];
-
-export const OWNERSHIP_LABELS: Record<Ownership, string> = {
-  tous: "Tous",
-  "dans-ma-biblio": "Dans ma bibliothèque",
-  "hors-ma-biblio": "Pas dans ma bibliothèque",
-};
-
-export function parseSort(value: string | undefined): Sort {
-  return SORTS.includes(value as Sort) ? (value as Sort) : "populaire";
-}
-
-export function parseOwnership(value: string | undefined): Ownership {
-  return OWNERSHIPS.includes(value as Ownership) ? (value as Ownership) : "tous";
-}
+export {
+  SORTS,
+  SORT_LABELS,
+  OWNERSHIPS,
+  OWNERSHIP_LABELS,
+  parseSort,
+  parseOwnership,
+} from "./catalogue-constants";
+export type { Sort, Ownership } from "./catalogue-constants";
 
 /** Un livre tel que consommé par les grilles et les rails. */
 export interface CatalogueBook {
