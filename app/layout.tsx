@@ -64,7 +64,7 @@ export default async function RootLayout({
         />
 
         <div className="mx-auto flex max-w-6xl gap-8 px-4 pt-5">
-          <aside className="w-48 shrink-0">
+          <aside className="hidden w-48 shrink-0 md:block">
             <SideNav />
           </aside>
           <main id="contenu" className="min-w-0 flex-1 pb-28 md:pb-16">
