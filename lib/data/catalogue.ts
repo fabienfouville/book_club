@@ -941,3 +941,48 @@ export async function listTopRated(limit = 10, userId?: string | null) {
 export function demoHighlights(limit = 10): CatalogueBook[] {
   return demoPopular(limit).map(demoToCatalogueBook);
 }
+
+/** Autres livres du même auteur déjà présents dans le catalogue. */
+export async function getBooksByAuthor(
+  author: string,
+  excludeId: string,
+  limit = 10,
+): Promise<CatalogueBook[]> {
+  const name = author.trim();
+  if (!name) return [];
+
+  let supabase: SupabaseClient | null = null;
+  try {
+    supabase = await createClient();
+  } catch {
+    supabase = null;
+  }
+
+  if (!supabase) {
+    return DEMO_BOOKS.filter(
+      (e) => e.book.id !== excludeId && e.book.authors.includes(name),
+    )
+      .slice(0, limit)
+      .map(demoToCatalogueBook);
+  }
+
+  try {
+    const { data, error } = await supabase
+      .from("books")
+      .select("*")
+      .contains("authors", [name])
+      .neq("id", excludeId)
+      .limit(limit);
+    if (error || !data) return [];
+
+    const books: Book[] = [];
+    for (const row of data as unknown[]) {
+      const book = coerceBook(row);
+      if (book) books.push(book);
+    }
+    return decorate(supabase, books, new Set());
+  } catch (error) {
+    console.warn("[catalogue] getBooksByAuthor a échoué :", error);
+    return [];
+  }
+}

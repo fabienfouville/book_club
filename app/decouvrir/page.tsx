@@ -170,9 +170,7 @@ export default async function DecouvrirPage({
 
       {items.length > 0 ? (
         <CatalogueGrid items={items} />
-      ) : q && !demo ? (
-        <ExternalSearchPanel query={q} />
-      ) : (
+      ) : !q ? (
         <EmptyState
           emoji="🔭"
           title="Rien à afficher ici"
@@ -180,7 +178,18 @@ export default async function DecouvrirPage({
           actionLabel="Réinitialiser les filtres"
           actionHref="/decouvrir"
         />
-      )}
+      ) : null}
+
+      {q && !demo ? (
+        <div className="space-y-2 pt-2">
+          {items.length > 0 ? (
+            <p className="text-sm font-semibold text-ink">
+              D&apos;autres résultats pour «&nbsp;{q}&nbsp;» ?
+            </p>
+          ) : null}
+          <ExternalSearchPanel query={q} />
+        </div>
+      ) : null}
 
       {items.length > 0 && hasMore ? (
         <div className="flex justify-center pt-2">

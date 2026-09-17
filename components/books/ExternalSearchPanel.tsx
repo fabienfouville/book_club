@@ -93,7 +93,7 @@ export function ExternalSearchPanel({ query }: { query: string }) {
     return (
       <div className="bc-card flex flex-col items-center gap-3 p-6 text-center">
         <p className="text-sm text-ink-soft">
-          Aucun résultat dans le catalogue de Bookclub pour «&nbsp;{query}&nbsp;».
+          Chercher «&nbsp;{query}&nbsp;» au-delà du catalogue de Bookclub.
         </p>
         <Button type="button" onClick={lancer} disabled={pending}>
           Chercher dans Open Library

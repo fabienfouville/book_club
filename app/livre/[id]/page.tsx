@@ -3,12 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BookCover } from "@/components/books/BookCover";
 import { BookSynopsis } from "@/components/books/BookSynopsis";
-import { RecommendationRail } from "@/components/books/BookRails";
+import { CatalogueRail, RecommendationRail } from "@/components/books/BookRails";
 import { BookRatingBreakdown } from "@/components/reviews/RatingBreakdown";
 import { ReviewList } from "@/components/reviews/ReviewList";
 import { BookActions } from "@/components/library/BookActions";
 import { BookSocialActions } from "@/components/social/BookSocialActions";
-import { getBookWithContext, getSimilarBooks } from "@/lib/data/catalogue";
+import { getBookWithContext, getBooksByAuthor, getSimilarBooks } from "@/lib/data/catalogue";
 import { getCurrentUser } from "@/lib/supabase/server";
 
 export const revalidate = 0;
@@ -52,7 +52,11 @@ export default async function LivrePage({
   const { book } = await loadBook(id);
   if (!book) notFound();
 
-  const similar = await getSimilarBooks(book.id, 12);
+  const author = book.authors[0] ?? null;
+  const [similar, sameAuthor] = await Promise.all([
+    getSimilarBooks(book.id, 12),
+    author ? getBooksByAuthor(author, book.id, 10) : Promise.resolve([]),
+  ]);
 
   return (
     <div className="space-y-6 py-4">
@@ -113,10 +117,36 @@ export default async function LivrePage({
         <ReviewList bookId={book.id} />
       </section>
 
+      {author ? (
+        <section className="space-y-3">
+          <div className="flex items-baseline justify-between gap-2">
+            <h2 className="font-display text-lg font-bold">Du même auteur</h2>
+            <Link
+              href={`/decouvrir?q=${encodeURIComponent(author)}`}
+              className="shrink-0 text-xs font-semibold text-primary hover:underline"
+            >
+              Chercher sur Open Library →
+            </Link>
+          </div>
+          {sameAuthor.length ? (
+            <CatalogueRail label="Du même auteur" items={sameAuthor} />
+          ) : (
+            <p className="text-sm text-ink-soft">
+              Aucun autre livre de {author} dans le catalogue pour l&apos;instant.
+            </p>
+          )}
+        </section>
+      ) : null}
+
       {similar.length ? (
         <section className="space-y-3">
-          <h2 className="font-display text-lg font-bold">Dans le même esprit</h2>
-          <RecommendationRail label="Dans le même esprit" items={similar} />
+          <h2 className="font-display text-lg font-bold">
+            Dans le même esprit dans le Bookclub
+          </h2>
+          <RecommendationRail
+            label="Dans le même esprit dans le Bookclub"
+            items={similar}
+          />
         </section>
       ) : null}
     </div>
