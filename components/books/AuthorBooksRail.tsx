@@ -50,7 +50,19 @@ export function AuthorBooksRail({
             b.authors.some((a) => normTitle(a) === normTitle(author)) &&
             !known.has(normTitle(b.title)),
         );
-        setItems(filtered);
+
+        // Open Library catalogue souvent chaque traduction comme une œuvre
+        // à part : sans ça, « Dune » ressortirait une fois par langue. On ne
+        // garde qu'un exemplaire par titre (de préférence avec couverture).
+        const byTitle = new Map<string, ExternalBook>();
+        for (const book of filtered) {
+          const key = normTitle(book.title);
+          const existing = byTitle.get(key);
+          if (!existing || (!existing.cover_url && book.cover_url)) {
+            byTitle.set(key, book);
+          }
+        }
+        setItems([...byTitle.values()]);
       })
       .catch(() => {
         if (alive) setItems([]);
