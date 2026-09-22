@@ -170,13 +170,11 @@ async function main() {
     process.stdout.write(`• ${book.title} — ${author} … `);
     const coverUrl = await findCover(book.title, author);
 
-    if (!coverUrl) {
-      console.log("aucune couverture trouvée, conservée telle quelle");
-      unchanged += 1;
-      await sleep(250);
-      continue;
-    }
-
+    // Sans correspondance vérifiée (titre + auteur), on efface toute
+    // couverture existante plutôt que de la laisser telle quelle : une
+    // couverture jamais confirmée par ce contrôle peut très bien être une
+    // erreur laissée par une exécution précédente (moins stricte). Mieux
+    // vaut la couverture stylisée générée par l'appli qu'une image fausse.
     const { error } = await supabase
       .from("books")
       .update({ cover_url: coverUrl })
@@ -186,6 +184,9 @@ async function main() {
     if (error) {
       console.log(`échec (${error.message})`);
       unchanged += 1;
+    } else if (!coverUrl) {
+      console.log("aucune couverture fiable, effacée par précaution");
+      updated += 1;
     } else {
       console.log("ok");
       updated += 1;
