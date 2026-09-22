@@ -74,17 +74,41 @@ function normalize(s) {
     .trim();
 }
 
-/** Un résultat compte comme correct si son titre normalisé contient (ou est
- * contenu dans) celui qu'on cherche — filtre simple mais efficace ici. */
-function isPlausibleMatch(wanted, got) {
+/** Titre : correct si le titre normalisé contient (ou est contenu dans)
+ * celui qu'on cherche — filtre simple mais efficace ici. */
+function titleMatches(wanted, got) {
   const a = normalize(wanted);
   const b = normalize(got);
   if (!a || !b) return false;
   return a.includes(b) || b.includes(a) || a.slice(0, 12) === b.slice(0, 12);
 }
 
+function lastWord(s) {
+  const parts = normalize(s).split(" ").filter(Boolean);
+  return parts[parts.length - 1] ?? "";
+}
+
+/** Auteur : substring dans un sens ou l'autre, ou même nom de famille — les
+ * sources orthographient parfois « Nom, Prénom » ou l'inverse. Un titre
+ * générique (« Eldorado », « L'Alchimiste »…) existe souvent chez plusieurs
+ * auteurs : sans cette vérification, on récupère la couverture d'un AUTRE
+ * livre. C'est exactement le bug qu'on corrige ici — ne jamais la retirer. */
+function authorMatches(wanted, gotAuthors) {
+  if (!wanted) return true;
+  const w = normalize(wanted);
+  const wLast = lastWord(wanted);
+  return (gotAuthors ?? []).some((g) => {
+    const ng = normalize(g);
+    return ng.includes(w) || w.includes(ng) || (wLast && lastWord(g) === wLast);
+  });
+}
+
+function isPlausibleMatch(wantedTitle, wantedAuthor, got) {
+  return titleMatches(wantedTitle, got.title) && authorMatches(wantedAuthor, got.authors);
+}
+
 async function searchOpenLibrary(query) {
-  const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&fields=title,cover_i,cover_edition_key&limit=5`;
+  const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&fields=title,author_name,cover_i,cover_edition_key&limit=5`;
   const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!res.ok) return [];
   const data = await res.json();
@@ -92,6 +116,7 @@ async function searchOpenLibrary(query) {
     .filter((d) => d.cover_i)
     .map((d) => ({
       title: d.title ?? "",
+      authors: d.author_name ?? [],
       cover_url: `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg`,
     }));
 }
@@ -106,7 +131,11 @@ async function searchGoogleBooks(query) {
       const img = it.volumeInfo?.imageLinks;
       const cover = img?.thumbnail || img?.smallThumbnail;
       return cover
-        ? { title: it.volumeInfo?.title ?? "", cover_url: cover.replace(/^http:/, "https:") }
+        ? {
+            title: it.volumeInfo?.title ?? "",
+            authors: it.volumeInfo?.authors ?? [],
+            cover_url: cover.replace(/^http:/, "https:"),
+          }
         : null;
     })
     .filter(Boolean);
@@ -116,19 +145,19 @@ async function findCover(title, author) {
   const query = `${title} ${author ?? ""}`.trim();
   try {
     const openLib = await searchOpenLibrary(query);
-    const hit = openLib.find((r) => isPlausibleMatch(title, r.title));
+    const hit = openLib.find((r) => isPlausibleMatch(title, author, r));
     if (hit) return hit.cover_url;
   } catch {
     // on retombe sur Google Books
   }
   try {
     const google = await searchGoogleBooks(query);
-    const hit = google.find((r) => isPlausibleMatch(title, r.title));
+    const hit = google.find((r) => isPlausibleMatch(title, author, r));
     if (hit) return hit.cover_url;
   } catch {
     // aucune source n'a répondu pour ce livre
   }
-  return null;
+  return null; // mieux vaut aucune couverture qu'une couverture fausse
 }
 
 async function main() {
