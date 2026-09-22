@@ -1,0 +1,22 @@
+name: Inspecter la structure du Google Sheet
+
+# Affiche uniquement la STRUCTURE du tableau (onglets, colonnes, formats),
+# jamais le contenu des lignes : le depot est public, donc ces logs aussi.
+# L'identifiant du document vient du secret GOOGLE_SHEET_ID.
+on:
+  workflow_dispatch:
+
+jobs:
+  peek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Inspecter la structure
+        env:
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+        run: node scripts/peek-sheet.mjs
