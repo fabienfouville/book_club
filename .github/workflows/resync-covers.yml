@@ -1,0 +1,27 @@
+name: Resynchroniser les couvertures
+
+# Bouton manuel (onglet Actions du repo) : lance le script covers:resync
+# depuis les serveurs GitHub, qui ont accès à Internet contrairement à
+# l'environnement Claude. Nécessite deux secrets du dépôt (voir ci-dessous).
+on:
+  workflow_dispatch:
+
+jobs:
+  resync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: Resynchroniser les couvertures
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: npm run covers:resync
