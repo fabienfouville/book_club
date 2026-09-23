@@ -111,21 +111,33 @@ function authorMatches(wanted, gotAuthors) {
 }
 
 function isPlausibleMatch(wantedTitle, wantedAuthor, got) {
-  return titleMatches(wantedTitle, got.title) && authorMatches(wantedAuthor, got.authors);
+  if (!authorMatches(wantedAuthor, got.authors)) return false;
+  return (got.titles ?? [got.title]).some((t) => titleMatches(wantedTitle, t));
 }
 
+/** Open Library range une œuvre sous son titre d'origine (« The Hobbit ») :
+ * on demande aussi ses éditions françaises (`lang=fr`) pour vérifier le
+ * titre français, et on préfère la couverture de cette édition. */
 async function searchOpenLibrary(query) {
-  const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&fields=title,author_name,cover_i,cover_edition_key&limit=5`;
+  const fields = "title,author_name,cover_i,editions,editions.title,editions.cover_i";
+  const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&lang=fr&fields=${fields}&limit=8`;
   const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS) });
   if (!res.ok) return [];
   const data = await res.json();
   return (data.docs ?? [])
-    .filter((d) => d.cover_i)
-    .map((d) => ({
-      title: d.title ?? "",
-      authors: d.author_name ?? [],
-      cover_url: `https://covers.openlibrary.org/b/id/${d.cover_i}-L.jpg`,
-    }));
+    .map((d) => {
+      const editions = (d.editions?.docs ?? []).filter((e) => e.title);
+      const coverId = editions.find((e) => e.cover_i)?.cover_i ?? d.cover_i;
+      return coverId
+        ? {
+            title: d.title ?? "",
+            titles: [d.title ?? "", ...editions.map((e) => e.title)],
+            authors: d.author_name ?? [],
+            cover_url: `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`,
+          }
+        : null;
+    })
+    .filter(Boolean);
 }
 
 async function searchGoogleBooks(query) {

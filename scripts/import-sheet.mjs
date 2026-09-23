@@ -200,7 +200,7 @@ const GENRE_EXACT = {
   bd: "bd", "bande dessinee": "bd", comics: "bd", "roman graphique": "bd",
   manga: "manga",
   biographie: "biographie", autobiographie: "biographie", memoires: "biographie", temoignage: "biographie", "recit autobiographique": "biographie", recit: "biographie",
-  essai: "essai", societe: "essai", politique: "essai", sociologie: "essai", economie: "essai", psychologie: "essai", documentaire: "essai",
+  essai: "essai", hggmc: "essai", geopolitique: "essai", societe: "essai", politique: "essai", sociologie: "essai", economie: "essai", psychologie: "essai", documentaire: "essai",
   philosophie: "philosophie", philo: "philosophie",
   science: "sciences", sciences: "sciences", "vulgarisation scientifique": "sciences",
   "developpement personnel": "developpement-personnel", "dev perso": "developpement-personnel", "bien etre": "developpement-personnel", spiritualite: "developpement-personnel",
@@ -228,6 +228,7 @@ function toGenres(raw) {
     if (g) {
       if (!out.includes(g)) out.push(g);
       if (n === "romantasy" && !out.includes("fantasy")) out.push("fantasy");
+      if (n === "hggmc" && !out.includes("historique")) out.push("historique");
     } else unmappedGenres.set(part.trim(), (unmappedGenres.get(part.trim()) ?? 0) + 1);
   }
   return out.slice(0, 3);
@@ -258,25 +259,45 @@ async function getJson(url) {
   return res.json();
 }
 
+const OL_FIELDS =
+  "key,title,author_name,cover_i,first_publish_year,number_of_pages_median,subject,editions,editions.title,editions.cover_i,editions.language";
+
+/** Open Library range une œuvre sous son titre d'origine (« The Hobbit ») :
+ * on vérifie aussi le titre des éditions françaises renvoyées (`lang=fr`),
+ * et on préfère leur couverture. L'auteur reste toujours vérifié. */
+function matchOpenLibrary(docs, title, author) {
+  for (const d of docs ?? []) {
+    if (!authorMatches(author, d.author_name)) continue;
+    const edition = (d.editions?.docs ?? []).find((e) => titleMatches(title, e.title));
+    if (!edition && !titleMatches(title, d.title)) continue;
+    const coverId = edition?.cover_i ?? d.cover_i;
+    return {
+      source: "openlibrary",
+      source_id: d.key.split("/").filter(Boolean).pop(),
+      cover_url: coverId ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg` : null,
+      published_year: d.first_publish_year ?? null,
+      page_count: d.number_of_pages_median ?? null,
+      genres: subjectsToGenres(d.subject),
+    };
+  }
+  return null;
+}
+
 async function findExternal(title, author) {
   const q = encodeURIComponent(`${title} ${author}`);
-  try {
-    const data = await getJson(
-      `https://openlibrary.org/search.json?q=${q}&fields=key,title,author_name,cover_i,first_publish_year,number_of_pages_median,subject&limit=8`,
-    );
-    const hit = (data.docs ?? []).find((d) => titleMatches(title, d.title) && authorMatches(author, d.author_name));
-    if (hit?.key) {
-      return {
-        source: "openlibrary",
-        source_id: hit.key.split("/").filter(Boolean).pop(),
-        cover_url: hit.cover_i ? `https://covers.openlibrary.org/b/id/${hit.cover_i}-L.jpg` : null,
-        published_year: hit.first_publish_year ?? null,
-        page_count: hit.number_of_pages_median ?? null,
-        genres: subjectsToGenres(hit.subject),
-      };
+  const queries = [
+    `q=${q}`,
+    // Recherche par champs séparés : meilleur rappel sur les titres traduits.
+    `title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}`,
+  ];
+  for (const query of queries) {
+    try {
+      const data = await getJson(`https://openlibrary.org/search.json?${query}&lang=fr&fields=${OL_FIELDS}&limit=8`);
+      const hit = matchOpenLibrary(data.docs, title, author);
+      if (hit) return hit;
+    } catch {
+      // requête suivante, puis Google Books
     }
-  } catch {
-    // on tente Google Books
   }
   try {
     const data = await getJson(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=8&printType=books`);
