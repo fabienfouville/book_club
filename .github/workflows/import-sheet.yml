@@ -1,0 +1,41 @@
+name: Importer ma bibliotheque depuis Google Sheets
+
+# Lit le Google Sheet (secret GOOGLE_SHEET_ID) et remplit la bibliotheque
+# du compte indique. Mode "apercu" = simulation sans ecriture (a lancer en
+# premier), "import" = ecriture. Les logs n'affichent ni titre ni auteur :
+# le depot est public.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "apercu (simulation) ou import (ecriture)"
+        type: choice
+        options: [apercu, import]
+        default: apercu
+      pseudo:
+        description: "Pseudo Bookclub du compte a remplir"
+        type: string
+        required: true
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dependances
+        run: npm ci
+
+      - name: Importer
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          BOOKCLUB_PSEUDO: ${{ inputs.pseudo }}
+          IMPORT_MODE: ${{ inputs.mode }}
+        run: node scripts/import-sheet.mjs

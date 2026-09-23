@@ -97,9 +97,16 @@ function authorMatches(wanted, gotAuthors) {
   if (!wanted) return true;
   const w = normalize(wanted);
   const wLast = lastWord(wanted);
+  const tokens = (s) => normalize(s).split(" ").filter((t) => t.length > 2);
+  const wTokens = tokens(wanted);
   return (gotAuthors ?? []).some((g) => {
     const ng = normalize(g);
-    return ng.includes(w) || w.includes(ng) || (wLast && lastWord(g) === wLast);
+    if (!ng || !w) return false;
+    if (ng.includes(w) || w.includes(ng)) return true;
+    // Nom de famille retrouvé dans l'autre nom, dans les deux sens : tolère
+    // « Coelho, Paulo » face à « Paulo Coelho », jamais un simple prénom commun.
+    const gLast = lastWord(g);
+    return (wLast.length > 2 && tokens(g).includes(wLast)) || (gLast.length > 2 && wTokens.includes(gLast));
   });
 }
 
