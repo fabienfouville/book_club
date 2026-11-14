@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "db:check": "node scripts/db-check.mjs",
     "covers:resync": "node scripts/resync-seed-covers.mjs",
-    "genres:reclassify": "node scripts/reclassify-litterature.mjs"
+    "genres:reclassify": "node scripts/reclassify-litterature.mjs",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -20,6 +23,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.17",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22.20.3",
     "@types/react": "^19.3.0",
@@ -28,6 +32,7 @@
     "eslint-config-next": "^15.5.25",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
-    "typescript": "5.9"
+    "typescript": "5.9",
+    "wrangler": "^4.162.0"
   }
 }

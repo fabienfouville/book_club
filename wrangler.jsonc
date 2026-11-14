@@ -1,0 +1,15 @@
+{
+  // Configuration Cloudflare Workers (offre gratuite) via OpenNext.
+  // Aucune clé ici : NEXT_PUBLIC_* et SUPABASE_SERVICE_ROLE_KEY se
+  // renseignent dans le tableau de bord Cloudflare (variables / secrets).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "le-book-club",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": { "enabled": true }
+}
