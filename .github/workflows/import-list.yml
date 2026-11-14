@@ -1,0 +1,51 @@
+name: Ajouter une liste de livres a une bibliotheque
+
+# Ajoute les livres d'un fichier JSON du depot (scripts/data/) a la
+# bibliotheque d'un compte, marques "possedes". Mode "apercu" = simulation
+# sans ecriture (a lancer en premier), "import" = ecriture. Les entrees deja
+# presentes ne sont jamais modifiees. Les logs n'affichent ni titre ni auteur.
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "apercu (simulation) ou import (ecriture)"
+        type: choice
+        options: [apercu, import]
+        default: apercu
+      pseudo:
+        description: "Pseudo Bookclub du compte a remplir"
+        type: string
+        required: true
+      fichier:
+        description: "Fichier de la liste"
+        type: string
+        default: scripts/data/liste-etagere.json
+      etagere:
+        description: "Etagere par defaut"
+        type: choice
+        options: [read, wishlist, reading, abandoned]
+        default: read
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer les dependances
+        run: npm ci
+
+      - name: Ajouter
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          BOOKCLUB_PSEUDO: ${{ inputs.pseudo }}
+          IMPORT_FILE: ${{ inputs.fichier }}
+          IMPORT_SHELF: ${{ inputs.etagere }}
+          IMPORT_MODE: ${{ inputs.mode }}
+        run: node scripts/import-list.mjs
