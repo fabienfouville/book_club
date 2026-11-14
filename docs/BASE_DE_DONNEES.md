@@ -80,3 +80,31 @@ français. À lancer juste après avoir collé les quatre migrations.
 Ajouter un nouveau fichier `0005_....sql` plutôt que de modifier un fichier
 déjà appliqué : Supabase ne sait pas rejouer une migration, seulement en
 empiler de nouvelles.
+
+## Sauvegardes
+
+L'offre gratuite de Supabase ne fournit pas de sauvegarde téléchargeable.
+Le workflow GitHub **« Sauvegarde de la base Supabase »** exporte chaque lundi
+les schémas `public` (livres, bibliothèques, notes, avis…) et `auth`
+(comptes), le compresse et le **chiffre en AES-256** avant de le stocker
+comme artefact (90 jours). Le dépôt étant public, le fichier non chiffré
+n'est jamais publié.
+
+**Secrets** (Settings → Secrets and variables → Actions) :
+- `SUPABASE_DB_URL` : Supabase → *Connect* → **Session pooler**, l'URI
+  `postgresql://postgres.xxxx:[MOT-DE-PASSE]@aws-…pooler.supabase.com:5432/postgres`
+  avec le mot de passe de la base. Pas la « Direct connection » : elle est en
+  IPv6, que GitHub Actions ne joint pas.
+- `BACKUP_PASSPHRASE` : une phrase secrète de votre choix. **Gardez-la dans
+  un gestionnaire de mots de passe** : sans elle, les sauvegardes sont
+  inutilisables.
+
+**Restaurer** : télécharger l'artefact depuis l'onglet Actions, puis
+
+```bash
+gpg -d bookclub-AAAA-MM-JJ.sql.gz.gpg | gunzip > sauvegarde.sql
+psql "<URI de la base cible>" -f sauvegarde.sql
+```
+
+Effet secondaire utile : cette connexion hebdomadaire compte comme une
+activité, ce qui évite la mise en pause automatique du projet gratuit.

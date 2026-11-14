@@ -1,0 +1,63 @@
+name: Sauvegarde de la base Supabase
+
+# Chaque lundi (et a la demande), exporte la base et la stocke CHIFFREE
+# comme artefact GitHub (conservee 90 jours).
+#
+# Le depot est public : les artefacts sont telechargeables par n'importe
+# quel compte GitHub. L'export est donc chiffre (AES-256) avant envoi, avec
+# une phrase secrete que vous seul connaissez. Sans elle, le fichier est
+# illisible.
+#
+# Secrets requis (Settings > Secrets and variables > Actions) :
+#   SUPABASE_DB_URL     chaine de connexion "Session pooler" (Supabase > Connect)
+#   BACKUP_PASSPHRASE   phrase secrete de chiffrement (a garder precieusement)
+on:
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verifier les secrets
+        env:
+          DB: ${{ secrets.SUPABASE_DB_URL }}
+          PASS: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          [ -n "$DB" ] || { echo "Secret SUPABASE_DB_URL manquant"; exit 1; }
+          [ -n "$PASS" ] || { echo "Secret BACKUP_PASSPHRASE manquant"; exit 1; }
+
+      # pg_dump doit etre au moins de la version du serveur Supabase (17).
+      - name: Installer pg_dump 17
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -fsSL -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq postgresql-client-17
+          /usr/lib/postgresql/17/bin/pg_dump --version
+
+      - name: Exporter et chiffrer
+        env:
+          DB: ${{ secrets.SUPABASE_DB_URL }}
+          PASS: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          set -o pipefail
+          FILE="bookclub-$(date -u +%Y-%m-%d).sql.gz.gpg"
+          # public = livres, bibliotheques, notes, avis... ; auth = comptes.
+          /usr/lib/postgresql/17/bin/pg_dump "$DB" --schema=public --schema=auth \
+              --no-owner --no-privileges \
+            | gzip -9 \
+            | gpg --batch --yes --pinentry-mode loopback --symmetric \
+                  --cipher-algo AES256 --passphrase "$PASS" -o "$FILE"
+          # Le clair n'est jamais ecrit sur disque ; seule la taille s'affiche.
+          ls -lh "$FILE"
+          echo "FILE=$FILE" >> "$GITHUB_ENV"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.FILE }}
+          path: ${{ env.FILE }}
+          retention-days: 90
+          if-no-files-found: error
