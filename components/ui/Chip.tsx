@@ -38,7 +38,7 @@ export function ChipLink({
   children: React.ReactNode;
 }) {
   return (
-    <Link href={href} scroll={false} className={cn(BASE, active ? ON : OFF)}>
+    <Link prefetch={false} href={href} scroll={false} className={cn(BASE, active ? ON : OFF)}>
       {children}
     </Link>
   );

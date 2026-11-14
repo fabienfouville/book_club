@@ -31,7 +31,7 @@ export function BookCard({
   priority?: boolean;
 }) {
   return (
-    <Link
+    <Link prefetch={false}
       href={`/livre/${book.id}`}
       className={cn("bc-glow group block focus-visible:outline-offset-4", className)}
     >

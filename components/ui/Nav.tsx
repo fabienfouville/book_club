@@ -37,7 +37,7 @@ export function BottomNav() {
           const active = isActive(pathname, href);
           return (
             <li key={href} className="flex-1">
-              <Link
+              <Link prefetch={false}
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
@@ -66,7 +66,7 @@ export function SideNav() {
           const active = isActive(pathname, href);
           return (
             <li key={href}>
-              <Link
+              <Link prefetch={false}
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={cn(

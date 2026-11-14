@@ -58,7 +58,7 @@ export function ButtonLink({
   children: ReactNode;
 }) {
   return (
-    <Link href={href} className={buttonClass(variant, size, className)} {...rest}>
+    <Link prefetch={false} href={href} className={buttonClass(variant, size, className)} {...rest}>
       {children}
     </Link>
   );

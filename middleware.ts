@@ -63,6 +63,19 @@ export async function middleware(request: NextRequest) {
   return response;
 }
 
+// Le middleware ne tourne que là où il sert (pages réservées aux membres et
+// pages de connexion) : sur les pages publiques, chaque passage coûtait une
+// invocation serveur et un appel à Supabase. La session reste lue par les
+// composants serveur partout ailleurs.
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|manifeste.webmanifest|.*\\.(?:svg|png|jpg|jpeg|webp|ico)$).*)"],
+  matcher: [
+    "/bibliotheque/:path*",
+    "/amis/:path*",
+    "/emprunts/:path*",
+    "/reglages/:path*",
+    "/bienvenue/:path*",
+    "/communaute/:path*",
+    "/connexion",
+    "/inscription",
+  ],
 };
